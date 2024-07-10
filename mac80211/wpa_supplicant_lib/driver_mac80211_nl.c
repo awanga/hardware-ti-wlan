@@ -24,7 +24,7 @@
 #include "config_ssid.h"
 #include "wpa_debug.h"
 #include "linux_ioctl.h"
-#include "hardware_legacy/driver_nl80211.h"
+#include "driver_nl80211.h"
 
 #define WPA_EVENT_DRIVER_STATE          "CTRL-EVENT-DRIVER-STATE "
 #define DRV_NUMBER_SEQUENTIAL_ERRORS     4
@@ -64,7 +64,7 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
 {
 	struct i802_bss *bss = priv;
 	struct wpa_driver_nl80211_data *drv = bss->drv;
-	struct ifreq ifr;
+	//struct ifreq ifr;
 	int ret = 0;
 
 	if (os_strcasecmp(cmd, "STOP") == 0) {
@@ -96,4 +96,31 @@ int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
 		wpa_printf(MSG_INFO, "%s: Unsupported command %s", __func__, cmd);
 	}
 	return ret;
+}
+
+
+
+int wpa_driver_set_p2p_noa(void *priv, u8 count, int start, int duration)
+{
+       return 0;
+}
+
+
+int wpa_driver_get_p2p_noa(void *priv, u8 *buf, size_t len)
+{
+       return 0;
+}
+
+
+int wpa_driver_set_p2p_ps(void *priv, int legacy_ps, int opp_ps, int ctwindow)
+{
+       return -1;
+}
+
+
+int wpa_driver_set_ap_wps_p2p_ie(void *priv, const struct wpabuf *beacon,
+                                const struct wpabuf *proberesp,
+                                const struct wpabuf *assocresp)
+{
+       return 0;
 }

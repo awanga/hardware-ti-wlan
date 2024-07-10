@@ -253,7 +253,7 @@ static int read_from_current_nvs(const char *nvs_file,
 {
     int curr_nvs, ret;
 
-    curr_nvs = open(nvs_file, O_RDONLY, S_IRUSR | S_IWUSR);
+    curr_nvs = open(nvs_file, O_RDONLY); // S_IRUSR | S_IWUSR
     if (curr_nvs < 0) {
         fprintf(stderr, "%s> Unable to open NVS file for reference "
             "(%s)\n", __func__, strerror(errno));
@@ -717,7 +717,7 @@ out:
     return res;
 }
 
-int dump_nvs_file(const char *nvs_file, struct wl12xx_common *cmn)
+int dump_nvs_file(const char *nvs_file, struct wl12xx_common *cmn __unused)
 {
     int sz=0, size;
     char buf[2048];
